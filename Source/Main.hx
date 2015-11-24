@@ -1,6 +1,7 @@
 package;
 
 
+import haxe.xml.Fast;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import openfl.display.Sprite;
@@ -28,10 +29,13 @@ class Main extends Sprite {
 // #end
 //   	return true;
 //   })();
+
+        static var time0:Float;
 	
 	public function new () {
 		
 		super ();
+                time0 = haxe.Timer.stamp();
 
     //  trace("Starting telemetry...");
     //  var cfg = new hxtelemetry.HxTelemetry.Config();
@@ -99,6 +103,40 @@ class Main extends Sprite {
 		test_profalloc();
   }
 
+
+  static function test_loadxml()
+  {
+
+        var data:String = Assets.getText( "assets/test.xml" );
+        trace("parsing 0");
+         Xml.parse( data );
+        trace("parsing 1");
+         Xml.parse( data );
+        trace("parsing 2");
+         Xml.parse( data );
+        trace("parsing 3");
+         Xml.parse( data );
+        trace("parsing 4");
+         Xml.parse( data );
+        trace("parsing 5");
+         Xml.parse( data );
+        trace("parsing 6");
+         Xml.parse( data );
+        trace("parsing 7");
+         Xml.parse( data );
+        trace("parsing 8");
+         Xml.parse( data );
+        trace("parsing 9 ***crash here!!");
+         Xml.parse( data );
+        trace("parsing 10");
+         Xml.parse( data );
+        trace("parsing 11");
+         Xml.parse( data );
+        trace("parsing 12");
+         Xml.parse( data );
+        trace("parsing 12");
+         Xml.parse( data );
+  }
   static function ls():LongStructor
   {
     trace("About to new a LongStructor:");
@@ -118,6 +156,12 @@ class Main extends Sprite {
         if (frame%10==0) trace("At frame: "+frame);
 
         function new_bmp() {
+            var dt = haxe.Timer.stamp() -time0;
+            if ( dt > 2 )
+            {
+                trace("xml test");
+                test_loadxml();
+            }
           //var bmp = new Bitmap(Assets.getBitmapData ("assets/openfl.png"));
           var bmp = new openfl.display.Shape();
 
