@@ -6,6 +6,11 @@
 
 	<app main="Main" file="DisplayingABitmap" />
 
+
+  <set name="legacy"/>
+  <set name="telemetry"/>
+  
+
   <app path="export/legacy_debug_telemetry" if="legacy debug telemetry" />
   <app path="export/legacy_release_telemetry" if="legacy release telemetry" />
   <app path="export/next_debug_telemetry" if="debug telemetry" unless="legacy" />
